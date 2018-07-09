@@ -1,11 +1,14 @@
 import uuid
 
 from application import db
+from sqlalchemy.dialects.postgresql import UUID
+
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
+    UserID = db.Column(UUID(as_uuid=True),unique=True, primary_key=True)
+    UserName = db.Column(db.String(80), unique=True, nullable=False)
+    Password = db.Column(db.String(64))
+    Email = db.Column(db.String(120), unique=True, nullable=False)
 
     def __repr__(self):
-        return '<User %r>' % self.username
+        return '<User %r>' % self.UserName

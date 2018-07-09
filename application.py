@@ -6,6 +6,7 @@ from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+
 app = Flask(__name__)
 db = SQLAlchemy()
 
@@ -23,7 +24,7 @@ Session(app)
 # Set up database
 #engine = create_engine(os.getenv("DATABASE_URL"))
 #db = scoped_session(sessionmaker(bind=engine))
-db.init_app(app) 
+db.init_app(app)
 
 @app.route("/")
 
