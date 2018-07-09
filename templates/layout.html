@@ -48,23 +48,11 @@
   <div class="modal" id="loginModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-body">
-          <div id="loginModalTitle">
-            Login
-          </div>
-          <div class="row">
-            <div id="loginUsername">
-              <input type="text" placeholder="Username" name="login_user_name" id="login_user_name" class="form-control">
-            </div>
-            <div id="loginPassword">
-              <input type="text" placeholder="Password" name="login_user_password" id="login_user_password" class="form-control">
-            </div>
-          </div>
-          <div class="form-group" padding-top="10px">
-            <input type="submit" value="Login" class="btn btn-primary " style="border-radius:0px" />
-            <p>Don't have an account! <a href="/register">Sign Up Here</a></p>
-          </div>
-        </div>
+        <form action="/login" method="POST">
+          <input type="username" name="username" placeholder="Username">
+          <input type="password" name="password" placeholder="Password">
+          <input type="submit" value="Log in">
+        </form>
 
       </div>
     </div>
