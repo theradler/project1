@@ -1,5 +1,7 @@
 Flask
 Flask-Session
+Flask-Login
+Flask-wtf
 psycopg2-binary
 SQLAlchemy
 alembic
@@ -7,4 +9,3 @@ Flask-Migrate
 Flask-Script
 Flask-SQLAlchemy
 Werkzeug
-gunicorn
