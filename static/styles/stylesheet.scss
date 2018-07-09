@@ -1,0 +1,45 @@
+$font-stack: Helvetica, sans-serif;
+
+#homepage_Banner {
+  padding-left: 25px;
+  font: 100% $font-stack;
+}
+
+#homepage_Content {
+  .row {
+    padding-left: 25px;
+    padding-right: 24px;
+  }
+
+  .col-sm-4 {
+    text-align: center;
+  }
+}
+
+#loginModal {
+  .close {
+    display: none;
+  }
+  #loginModalTitle {
+    text-align: center;
+  }
+
+ .form-control {
+  margin: auto;
+  width: 95%;
+  margin-bottom: 10px;
+   }
+   #login_user_password {
+     margin-bottom: 10px;
+   }
+}
+
+.modal-backdrop {
+  background-color: rgba(0,0,0,.0001) !important;
+}
+
+#registrationColumn {
+padding-left: 25px;
+width: 40%;
+
+}
