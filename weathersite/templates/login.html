@@ -1,0 +1,16 @@
+{% extends "layout.html" %} {% block body %}
+<div class="row">
+  <div class="col-sm-8" id="loginColumn">
+    <form action='/login' method="post">
+      {{ form.username.label }}: {{ form.username(placeholder='username') }}
+      <br>
+      {{ form.password.label }}: {{ form.password }}
+      <br>
+      {{ form.submit }}
+      {{ form.csrf_token }}
+    </form>
+  </div>
+  <div class="col-sm-4">
+  </div>
+</div>
+{% endblock %}
