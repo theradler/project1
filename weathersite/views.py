@@ -14,10 +14,6 @@ def index():
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        # connection = db.get_engine(app).connect()
-        # connection.execute('SELECT * FROM user')
-        # # connection.execute('INSERT INTO user (UserID, UserName, Password) VALUES (:UserID, :UserName, :Password)', {"UserID" : uuid4(), "UserName" : form.username.data, "Password" : form.password1.data  })
-        # connection.commit()
         db.session.add(User(UserID = uuid4() ,UserName = form.username.data, Password = form.password1.data ))
         db.session.commit()
         return redirect('/login')
