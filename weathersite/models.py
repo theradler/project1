@@ -24,8 +24,8 @@ class User(db.Model):
 
 class Location(db.Model):
     locationID = db.Column(UUID(as_uuid=True),unique=True, primary_key=True)
-    Zipcode = db.Column(db.String(64),unique=True)
-    City = db.Column(db.String(64),unique=True)
+    Zipcode = db.Column(db.String(64))
+    City = db.Column(db.String(64))
     State = db.Column(db.String(64))
     Latitude = db.Column(db.Integer())
     Longitude = db.Column(db.Integer())
