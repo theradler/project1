@@ -1,4 +1,5 @@
 import os
+import uuid
 
 from flask import Flask, session, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -6,10 +7,10 @@ from flask_session import Session
 from flask_login import LoginManager, current_user, login_user
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from models import User
-from app.forms import LoginForm, RegisterForm
+#from models import User
+from forms import LoginForm, RegisterForm
 from sqlalchemy.dialects.postgresql import UUID
-from UUID import uuid4
+from uuid import uuid4
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -38,20 +39,19 @@ def index():
     user_session= False
     return render_template("index.html", user_session=user_session)
 
-@app.route("/register", methods['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     form = RegisterForm()
+    return render_template('register.html', form=form)
     if form.validate_on_submit():
         user = User.query.filter_by(UserName=form.username.data).first()
-        if user is not None:
-            flash("Username already in use")
-        try:
-            db.execute("Insert into User (UserID, UserName, Password) VALUES (:UserID, :UserName, :Password, :Email)"),
-                                    {"UserID": uuid4(), "UserName": form.username.data, "Password": form.password.data}
+        if user is None:
+            db.execute("INSERT INTO User (UserID, UserName, Password) VALUES (:UserId, :UserName, :Password)",
+            {"UserID": uuid4(), "UserName": form.username.data, "Password" : form.password.data })
             db.commit()
-            return render_template("/index")
+            return render_template('succes.html')
+        return redirect('fail.html')
+    return render_template('fail.html', title='Register',form=form)
 
 @login.user_loader
 def load_user(id):
@@ -68,7 +68,7 @@ def login():
             flash("Invalid username or password")
         login_user(user,remember=form.remember_me.data)
         return redirect(url_for('index'))
-    return render_template('index.html', title='Sign In'm form=from)
+    return render_template('index.html', title='Sign In', form=form)
 
 
 
