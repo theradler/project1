@@ -2,5 +2,18 @@
 {% set page_title = 'Search' %}
 {% block body %}
 
-
+<div class="row">
+    <h1>{{ location_id }}</h1>
+    <h1>{{ current_user.get_id }}</h1>
+  <div class="col-sm-8" id="loginColumn">
+    <form action='/comment' method="post">
+      {{ form.comment.label }}: {{ form.comment }}
+      <br>
+      {{ form.submit }}
+      {{ form.csrf_token }}
+    </form>
+  </div>
+  <div class="col-sm-4">
+  </div>
+</div>
 {% endblock %}

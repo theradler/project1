@@ -2,8 +2,8 @@ from weathersite import app, db
 from flask import Flask, session, render_template, request, flash, redirect, url_for
 from flask_login import login_user, logout_user
 from uuid import uuid4
-from .forms import LoginForm, RegisterForm, SearchForm
-from .models import User, Location
+from .forms import LoginForm, RegisterForm, SearchForm, CommentForm
+from .models import User, Location, Comments
 from .utils import darkSkyRequester
 
 @app.route("/")
@@ -27,11 +27,10 @@ def signin():
         user = User.query.filter_by(UserName=form.username.data).first_or_404()
         if user.is_correct_password(form.password.data):
             login_user(user)
-            return redirect(url_for('searchhome'))
+            return redirect(url_for('search'))
         else:
             return redirect(url_for('register'))
     return render_template('login.html', form=form)
-
 
 @app.route('/logout', methods=['GET'])
 def logout():
@@ -62,9 +61,20 @@ def search_results():
 
 @app.route('/location/<string:location_id>')
 def location(location_id):
+    form = CommentForm()
     location_data = Location.query.get(location_id)
     weather_data = darkSkyRequester(app.config['DARKSKY_API_KEY'],location_data.latitude, location_data.longitude)
     weather_data = weather_data.getCurrentWeather()
-    return render_template('location.html',location_data=location_data,weather_data=weather_data)
+    return render_template('location.html',location_data=location_data,weather_data=weather_data,form=form,location_id=location_id,user_id=user_id)
 
 
+@app.route('/comment/<string:location_id>/<string:user_id>', methods=['POST'])
+def comment(location_id, user_id):
+    form = CommentForm()
+    if request.method == 'POST':
+        comment = Comments(user_id = user_id,
+                           location_id = location_id,
+                           comment = form.comment.data
+                           )
+        db.session.add(comment)
+    return render_template('location.html')

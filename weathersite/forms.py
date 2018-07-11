@@ -27,3 +27,8 @@ class SearchForm(Form):
     select = SelectField('Search for location:', choices=choices)
     search = StringField('Search')
     submit = SubmitField('Search')
+
+
+class CommentForm(Form):
+    comment = StringField('Comment', validators=[DataRequired()])
+    submit = SubmitField('Check In')
