@@ -65,7 +65,7 @@ def location(location_id):
     location_data = Location.query.get(location_id)
     weather_data = darkSkyRequester(app.config['DARKSKY_API_KEY'],location_data.latitude, location_data.longitude)
     weather_data = weather_data.getCurrentWeather()
-    return render_template('location.html',location_data=location_data,weather_data=weather_data,form=form,location_id=location_id,user_id=user_id)
+    return render_template('location.html',location_data=location_data,weather_data=weather_data,form=form,location_id=location_id)
 
 
 @app.route('/comment/<string:location_id>/<string:user_id>', methods=['POST'])
@@ -77,4 +77,5 @@ def comment(location_id, user_id):
                            comment = form.comment.data
                            )
         db.session.add(comment)
-    return render_template('location.html')
+        db.session.commit()
+    return render_template('location.html',form=form)
