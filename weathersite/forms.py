@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired
 
 from .validators import Unique, IsPasswordMatch
@@ -18,3 +18,12 @@ class LoginForm(Form):
     username = StringField('UserName', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
+
+
+class SearchForm(Form):
+    choices = [('zipcode', 'Zipcode'),
+               ('city','City'),
+               ('state','State')]
+    select = SelectField('Search for location:', choices=choices)
+    search = StringField('Search')
+    submit = SubmitField('Search')

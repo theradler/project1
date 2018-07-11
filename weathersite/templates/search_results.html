@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% set page_title = 'Search Result' %}
+{% block body %}
+<div>
+    <h1>Search Results</h1>
+<table>
+    {% for result in results %}
+    <TR>
+        <TD class="c1"> {{ result.city }} </TD>
+        <TD class="c2"> {{ result.zipcode }} </TD>
+        <TD class="c2"> {{ result.state }} </TD>
+        <TD class="c3"> <a href="/location/{{ result.locationid }}">View Weather</a></TD>
+    </TR>
+
+    {% endfor %}
+</table>
+</div>
+{% endblock %}

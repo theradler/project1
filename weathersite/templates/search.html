@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% set page_title = 'Search' %}
+{% block body %}
+<div class="row">
+  <div class="col-sm-8" id="searchColumn">
+    <form action='/search' method="post">
+      {{ form.select.label }}: {{ form.select }}
+      <br>
+      {{ form.search.label }}: {{ form.search }}
+      <br>
+      {{ form.submit }}
+      {{ form.csrf_token }}
+    </form>
+  </div>
+  <div class="col-sm-4">
+  </div>
+</div>
+{% endblock %}

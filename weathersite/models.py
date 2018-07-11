@@ -2,6 +2,7 @@ from weathersite import db
 from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 
+
 class User(db.Model):
     UserID = db.Column(UUID(as_uuid=True),unique=True, primary_key=True)
     UserName = db.Column(db.String(80), unique=True, nullable=False)
@@ -23,9 +24,15 @@ class User(db.Model):
         return '<User %r>' % self.UserName
 
 class Location(db.Model):
-    locationID = db.Column(UUID(as_uuid=True),unique=True, primary_key=True)
-    Zipcode = db.Column(db.String())
-    City = db.Column(db.String())
-    State = db.Column(db.String())
-    Latitude = db.Column(db.Integer())
-    Longitude = db.Column(db.Integer())
+    __tablename__ = 'location'
+    __searchable__ = ['Zipcode','City','State']
+    locationid = db.Column(UUID(as_uuid=True),unique=True, primary_key=True)
+    zipcode = db.Column(db.String())
+    city = db.Column(db.String())
+    state = db.Column(db.String())
+    latitude = db.Column(db.Float())
+    longitude = db.Column(db.Float())
+    population = db.Column(db.Integer())
+
+    def __repr__(self):
+        return '<City: %r>' % self.city
