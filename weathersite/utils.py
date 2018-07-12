@@ -14,8 +14,6 @@ class darkSkyRequester(object):
         self.long = long
 
     def getCurrentWeather(self):
-        request_string = "https://api.darksky.net/forecast/%s/%s/%s" %(self.key, self.lat, self.long)
-        print(request_string)
-        response = requests.get(request_string)
-        print(response)
-        return response
+        request_string = "https://api.darksky.net/forecast/%s/%s,%s" %(self.key, self.lat, self.long)
+        response = requests.get(request_string).json()
+        return response["currently"]

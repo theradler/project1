@@ -1,3 +1,26 @@
+@media screen and (min-width: 768px) {
+  body {
+    font: 100% Helvetica, sans-serif;
+    padding-top: 40px;
+    margin: 0;
+    margin-left: 10px;
+  }
+}
+#myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+.content {
+    position: fixed;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    width: 100%;
+    padding: 20px;
+}
 #homepage_Banner {
   padding-left: 25px;
   font: 100% Helvetica, sans-serif;
@@ -7,32 +30,30 @@
   padding-left: 25px;
   padding-right: 24px;
 }
+
 #homepage_Content .col-sm-4 {
   text-align: center;
 }
 
-#loginModal .close {
-  display: none;
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: inherit;
 }
-#loginModal #loginModalTitle {
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+.thumbnail img {
+    height:300px;
+    width:100%;
+}
+#LoginForm {
+  font: 100% Helvetica, sans-serif;
   text-align: center;
 }
-#loginModal .form-control {
-  margin: auto;
-  width: 95%;
-  margin-bottom: 10px;
-}
-#loginModal #login_user_password {
-  margin-bottom: 10px;
-}
-
-.modal-backdrop {
-  background-color: rgba(0, 0, 0, 0.0001) !important;
-}
-
-#registrationColumn {
-  padding-left: 25px;
-  width: 40%;
+.form-label {
+font-size: 25px;
 }
 
 /*# sourceMappingURL=style.css.map */

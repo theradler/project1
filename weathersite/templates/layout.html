@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>My Website!</title>
+  <title>Weather Finder</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Latest compiled and minified CSS -->
@@ -14,28 +15,27 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+  <div id="navbar">
+  <nav class="navbar navbar-fixed-top bg-primary navbar-dark>
+    <div class=" container-fluid ">
+      <div class="navbar-header ">
+        <button type="button " class="navbar-toggle collapsed " data-toggle="collapse " data-target="#bs-example-navbar-collapse-1 " aria-expanded="false ">
+        <span class="sr-only ">Toggle navigation</span>
+        <span class="icon-bar "></span>
+        <span class="icon-bar "></span>
+        <span class="icon-bar "></span>
       </button>
-        <a class="navbar-brand" href="/">title</a>
+        <a class="navbar-brand " href="/ " style="margin-left: 10px;"
+>Weather Finder</a>
       </div>
-
-
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
+      <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1 ">
+        <ul class="nav navbar-nav navbar-right bg-primary ">
           <li>
             {% if current_user.is_active %}
-            <a href="/logout">
+            <a href="/logout " style="margin-right: 10px;">
                 Logout
               </a> {% else %}
-            <a href="#loginModal" data-toggle="modal" data-target="#loginModal">
+            <a href="/login " style="margin-right: 10px; ">
                 Login/Sign Up
               </a> {% endif %}
           </li>
@@ -45,19 +45,8 @@
       </div>
     </div>
   </nav>
-  <div class="modal" id="loginModal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <form action="/login" method="POST">
-          <input type="username" name="username" placeholder="Username">
-          <input type="password" name="password" placeholder="Password">
-          <input type="submit" value="Log in">
-        </form>
-
-      </div>
-    </div>
-  </div>
-
+</div>
+<div style="margin-top: 10px"></div>
 
 
 

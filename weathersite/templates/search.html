@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% set page_title = 'Search' %}
 {% block body %}
+<h1>Search for your town/state/zipcode<h1>
+  <hr>
 <div class="row">
   <div class="col-sm-8" id="searchColumn">
     <form action='/search' method="post">
-      {{ form.select.label }}: {{ form.select }}
+      {{ form.select.label(class_="form-label") }}: {{ form.select(class_="form-control") }}
       <br>
-      {{ form.search.label }}: {{ form.search }}
+      {{ form.search.label(class_="form-label") }}: {{ form.search(class_="form-control") }}
       <br>
-      {{ form.submit }}
+      {{ form.submit(class_='btn btn-secondary') }}
       {{ form.csrf_token }}
     </form>
   </div>

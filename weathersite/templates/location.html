@@ -5,6 +5,7 @@
 <div class="row">
     <h1>{{ location_id }}</h1>
     <h1>{{ current_user.get_id() }}</h1>
+    <h1>{{ weather_data }}</h1>
   <div class="col-sm-8" id="loginColumn">
     <form action='/comment/{{ location_id }}/{{ current_user.get_id() }}' method="post">
       {{ form.comment.label }}: {{ form.comment }}
