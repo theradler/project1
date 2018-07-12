@@ -15,7 +15,7 @@ class RegisterForm(Form):
 
 
 class LoginForm(Form):
-    username = StringField('UserName', validators=[DataRequired()])
+    username = StringField('', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
@@ -25,7 +25,7 @@ class SearchForm(Form):
                ('city','City'),
                ('state','State')]
     select = SelectField('Choose your search criteria', choices=choices)
-    search = StringField('Enter you search value')
+    search = StringField('Enter your search value')
     submit = SubmitField('Let her rip')
 
 

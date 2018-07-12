@@ -1,5 +1,5 @@
 from weathersite import app, db
-from flask import render_template, request, redirect, url_for, jsonify, flash
+from flask import render_template, request, redirect, url_for, jsonify
 from flask_login import login_user, logout_user, current_user
 from uuid import uuid4
 from .forms import LoginForm, RegisterForm, SearchForm, CommentForm

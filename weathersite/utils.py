@@ -1,11 +1,4 @@
-import requests, json
-
-# darkskyapi = '6088666bfa2a7a4897f896605b254ffc'
-# lat = '41.83'
-# long = '-87.68'
-# request_string = "https://api.darksky.net/forecast/%s/%s,%s" %(darkskyapi, lat, long)
-# response = requests.get(request_string).json()
-# print(response)
+import requests
 
 class darkSkyRequester(object):
     def __init__(self, key, lat, long):
