@@ -33,6 +33,9 @@ def signin():
     form = LoginForm()
     error = None
     if form.validate_on_submit():
+        if (User.query.filter_by(UserName=form.username.data).count() == 0):
+            error = "This user does not exist"
+            return render_template('login.html', form=form,error=error)
         user = User.query.filter_by(UserName=form.username.data).first_or_404()
         if user.is_correct_password(form.password.data):
             login_user(user)
