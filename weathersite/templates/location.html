@@ -5,7 +5,14 @@
     </div>
   {% endif %}
 <div class="container">
-  <div class="row">
+    <div class="row" id="returnUtility">
+        <br>
+    </div>
+    <div class="row"id="returnUtility">
+        <input style="margin-left:10px" class="btn btn-primary" type="button" value="Return to Search" onclick="history.go(-1);return true;" />
+        <hr>
+    </div>
+  <div class="row" id="location_info">
     <div class="col-xs-4 text-left" id="city_demographics">
       <h3>Location Information</h3>
       <h5>City: {{ location_data.city }}</h5>
@@ -28,8 +35,7 @@
       <h5>Number of Check Ins: {{ comment_count }}</h5>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-4">
+  <div class="row" id="commentSection">
       <h3>Check In and Leave a Comment</h3>
          {% if current_user_check_ins == 0 %}
       <form action='/comment/{{ location_id }}/{{ current_user.get_id() }}' method="post">
@@ -42,9 +48,13 @@
              </div>
           {% endif %}
       </form>
-    </div>
      <div class="col-xs-4">
+
+     </div>
+  </div>
+    <div class="row">
          <table class="table">
+             <h3>See what others are saying...</h3>
   <thead>
     <tr>
       <th scope="col">Comment</th>
@@ -60,8 +70,7 @@
   </tbody>
     {% endfor %}
 </table>
-     </div>
-  </div>
+    </div>
 </div>
 
 {% endblock %}

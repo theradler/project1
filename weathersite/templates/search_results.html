@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% set page_title = 'Search Result' %}
 {% block body %}
-<div>
-    <h1 id="searchResultHeader">Search Results:</h1>
-<table class="table">
+<div id="searchResultHeader" class="row">
+    <h1 >Search Results</h1>
+    <input class="btn btn-primary" type="button" value="New Search" onclick="window.location.href='/search'"/>
+    <hr>
+ </div>
+ <div>
+<table class="table" align="center">
   <thead>
     <tr>
       <th scope="col">City</th>
@@ -18,7 +22,7 @@
         <TD class="c1"> {{ result.city }} </TD>
         <TD class="c2"> {{ result.zipcode }} </TD>
         <TD class="c2"> {{ result.state }} </TD>
-        <TD class="c3"><input style="margin-left:10px" class="btn btn-primary" type="button" value="Go!" onclick="window.location.href='/location/{{ result.locationid }}'" /></TD>
+        <TD class="c3"><input class="btn btn-primary" type="button" value="Go!" onclick="window.location.href='/location/{{ result.locationid }}'" /></TD>
     </TR>
   </tbody>
     {% endfor %}

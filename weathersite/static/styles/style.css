@@ -3,15 +3,8 @@
     font: 100% Helvetica, sans-serif;
     padding-top: 40px;
     margin: 0;
-    margin-left: 10px;
+
   }
-}
-#myVideo {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
 }
 .content {
     position: fixed;
@@ -22,8 +15,10 @@
     padding: 20px;
 }
 #homepage_Banner {
-  padding-left: 25px;
   font: 100% Helvetica, sans-serif;
+}
+#jumbotronContent {
+  padding-left: 10px;
 }
 
 #homepage_Content .row {
@@ -57,15 +52,16 @@ font-size: 25px;
 }
 .table {
     border-radius: 5px;
-    width: 50%;
+    width: 100%;
     margin: 0px auto;
     float: none;
 }
 #searchResultHeader {
   border-radius: 5px;
-  width: 50%;
+  width: 100%;
   margin: 0px auto;
   float: none;
+  text-align: left;
 }
 #city_demographics {
   text-align: left;
@@ -73,5 +69,16 @@ font-size: 25px;
 .alert-danger {
     width:90%;
 }
-
+#location_info {
+  width: 100%;
+}
+#returnUtility {
+  width: 100%;
+}
+#commentSection {
+  width: 100%;
+}
+#brandLogo {
+  display: inline;
+}
 /*# sourceMappingURL=style.css.map */
