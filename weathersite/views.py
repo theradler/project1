@@ -15,6 +15,10 @@ def index():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
+    error = None
+    if User.query.filter_by(UserName=form.username.data).count() != 0:
+        error = "This username is already in use"
+        return render_template('register.html',form=form,error=error)
     if form.validate_on_submit():
         db.session.add(User(UserID = uuid4() ,UserName = form.username.data, Password = form.password1.data ))
         db.session.commit()

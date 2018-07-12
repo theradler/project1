@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-{% if request.args.get('error') %}
+{% if request.args.get('error') or error %}
 <div class="alert alert-danger" role="alert">
       <strong>Oh snap!</strong> {{ request.args.get('error') }}
     </div>
