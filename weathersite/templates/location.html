@@ -1,20 +1,67 @@
-{% extends "layout.html" %}
-{% set page_title = 'Search' %}
-{% block body %}
+{% extends "layout.html" %} {% set page_title = 'Search' %} {% block body %}
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+      <strong>Oh snap!</strong> {{ error }}
+    </div>
+  {% endif %}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4 text-left" id="city_demographics">
+      <h3>Location Information</h3>
+      <h5>City: {{ location_data.city }}</h5>
+      <h5>State: {{ location_data.state }}</h5>
+      <h5>Zipcode: {{ location_data.zipcode }}</h5>
+      <h5>Population: {{ location_data.population }}</h5>
+      <h5>Latitude: {{ location_data.latitude }} Longitude: {{ location_data.longitude }}</h5>
+    </div>
+    <div class="col-xs-4">
+      <h3>Weather Information</h3>
+      <h5>Current Weather: {{ weather_data.summary }} as of {{ time }}</h5>
+      <h5>Temperature: {{weather_data.temperature }}&#176 F (Feels like {{ weather_data.apparentTemperature }}&#176 F)</h5>
+      <h5>Humidity: {{ humidity }}</h5>
+      <h5>Dew Point: {{ weather_data.dewPoint }}</h5>
+      <h5>Wind Speed: {{ weather_data.windSpeed }} mph</h5>
 
-<div class="row">
-    <h1>{{ location_id }}</h1>
-    <h1>{{ current_user.get_id() }}</h1>
-    <h1>{{ weather_data }}</h1>
-  <div class="col-sm-8" id="loginColumn">
-    <form action='/comment/{{ location_id }}/{{ current_user.get_id() }}' method="post">
-      {{ form.comment.label }}: {{ form.comment }}
-      <br>
-      {{ form.submit }}
-      {{ form.csrf_token }}
-    </form>
+    </div>
+    <div class="col-xs-4">
+      <h3>User Interactions</h3>
+      <h5>Number of Check Ins: {{ comment_count }}</h5>
+    </div>
   </div>
-  <div class="col-sm-4">
+  <div class="row">
+    <div class="col-xs-4">
+      <h3>Check In and Leave a Comment</h3>
+         {% if current_user_check_ins == 0 %}
+      <form action='/comment/{{ location_id }}/{{ current_user.get_id() }}' method="post">
+         {{ form.comment(class_="form-control") }}
+        <br>
+          {{ form.submit(class_='btn btn-primary') }} {{ form.csrf_token }}
+          {% else %}
+            <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> You have already checked in at this location
+             </div>
+          {% endif %}
+      </form>
+    </div>
+     <div class="col-xs-4">
+         <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Comment</th>
+      <th scope="col">User</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comment in comments %}
+    <tr scope="row">
+        <TD class="c1"> {{ comment.comment }} </TD>
+        <TD class="c2"> {{ comment.user_name }}</TD>
+    </TR>
+  </tbody>
+    {% endfor %}
+</table>
+     </div>
   </div>
 </div>
+
 {% endblock %}

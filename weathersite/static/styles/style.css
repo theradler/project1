@@ -67,5 +67,11 @@ font-size: 25px;
   margin: 0px auto;
   float: none;
 }
+#city_demographics {
+  text-align: left;
+}
+.alert-danger {
+    width:90%;
+}
 
 /*# sourceMappingURL=style.css.map */

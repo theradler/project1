@@ -1,5 +1,4 @@
 from weathersite import db
-from flask_login import UserMixin
 from sqlalchemy.dialects.postgresql import UUID
 
 
@@ -21,7 +20,7 @@ class User(db.Model):
         return True
 
     def __repr__(self):
-        return '<User %r>' % self.UserName
+        return  self.UserName
 
 class Location(db.Model):
     __tablename__ = 'location'
@@ -42,8 +41,9 @@ class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer(), primary_key=True)
     user_id = db.Column(UUID(as_uuid=True), db.ForeignKey(User.UserID))
-    location_id = db.Column(UUID(as_uuid=True)), db.ForeignKey(Location.locationid)
+    location_id = db.Column(UUID(as_uuid=True), db.ForeignKey(Location.locationid))
     comment = db.Column(db.String())
+    user_name = db.relationship("User",backref="Comments",lazy=True)
 
     def __repr__(self):
         return '<Comment: %r>' % self.comment

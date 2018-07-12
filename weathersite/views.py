@@ -1,10 +1,11 @@
 from weathersite import app, db
-from flask import session, render_template, request, redirect, url_for, abort, jsonify
-from flask_login import login_user, logout_user
+from flask import render_template, request, redirect, url_for, jsonify, flash
+from flask_login import login_user, logout_user, current_user
 from uuid import uuid4
 from .forms import LoginForm, RegisterForm, SearchForm, CommentForm
 from .models import User, Location, Comments
 from .utils import darkSkyRequester
+import datetime
 
 @app.route("/")
 def index():
@@ -41,17 +42,24 @@ def logout():
 @app.route('/search', methods=['GET','POST'])
 def search():
     form = SearchForm()
+    error = None
     if form.validate_on_submit():
         column = form.select.data
         search = str.upper(form.search.data)
         if column == 'zipcode':
             results = Location.query.filter(Location.zipcode.like(('%' + search +'%'))).all()
+            result_count = Location.query.filter(Location.zipcode.like(('%' + search +'%'))).count()
         elif column == 'city':
             results = Location.query.filter(Location.city.like(('%' + search + '%'))).all()
+            result_count = Location.query.filter(Location.city.like(('%' + search + '%'))).count()
         elif column == 'state':
             results = Location.query.filter(Location.state.like(('%' + search + '%'))).all()
+            result_count = Location.query.filter(Location.state.like(('%' + search + '%'))).count()
         else:
-            return  render_template('search.html')
+            return render_template('search.html')
+        if result_count == 0:
+            error = "No results found, please try again"
+            return render_template('search.html',error=error,form=form)
         return render_template('search_results.html', results=results)
     return render_template('search.html', form=form)
 
@@ -65,7 +73,12 @@ def location(location_id):
     location_data = Location.query.get(location_id)
     weather_data = darkSkyRequester(app.config['DARKSKY_API_KEY'],location_data.latitude, location_data.longitude)
     weather_data = weather_data.getCurrentWeather()
-    return render_template('location.html',location_data=location_data,weather_data=weather_data,form=form,location_id=location_id)
+    humidity = str(int(weather_data['humidity'] * 100 )) + "%"
+    time =  datetime.datetime.fromtimestamp(weather_data['time']).strftime('%I:%M:%S %p on %Y-%m-%d ')
+    comments = Comments.query.filter_by(location_id=location_data.locationid)
+    comment_count = Comments.query.filter_by(location_id=location_data.locationid).count()
+    current_user_check_ins = Comments.query.filter_by(location_id=location_id,user_id=current_user.get_id()).count()
+    return render_template('location.html',location_data=location_data,weather_data=weather_data,form=form,location_id=location_id,time=time,humidity=humidity,comments=comments,comment_count=comment_count,current_user_check_ins=current_user_check_ins)
 
 
 @app.route('/comment/<string:location_id>/<string:user_id>', methods=['POST'])
@@ -78,7 +91,7 @@ def comment(location_id, user_id):
                            )
         db.session.add(comment)
         db.session.commit()
-    return render_template('location.html',form=form)
+    return redirect(url_for('location',location_id=location_id))
 
 @app.route('/api/<string:zip>', methods=['GET'])
 def api_request(zip):
