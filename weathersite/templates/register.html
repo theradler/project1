@@ -1,8 +1,13 @@
 {% extends "layout.html" %}
 {% block body %}
-{% if request.args.get('error') or error %}
+{% if request.args.get('error') %}
 <div class="alert alert-danger" role="alert">
       <strong>Oh snap!</strong> {{ request.args.get('error') }}
+    </div>
+{% endif %}
+{% if error %}
+<div class="alert alert-danger" role="alert">
+      <strong>Oh snap!</strong> {{ error }}
     </div>
 {% endif %}
 <h1 style="margin-left:10px">Create an Account</h1>
