@@ -2,7 +2,7 @@ from flask_wtf import Form
 from wtforms import StringField, PasswordField,  SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired
 
-from .validators import Unique, IsPasswordMatch
+from .validators import Unique
 from .models import User
 
 class RegisterForm(Form):
@@ -11,7 +11,7 @@ class RegisterForm(Form):
     password1 = PasswordField('Enter Password', validators=[DataRequired()])
     password2 = PasswordField('Re-Enter Password', validators=[DataRequired()])
     submit = SubmitField('Register')
-    #, validators=[IsPasswordMatch(password1, password2, message="These passwords do not match")])
+
 
 
 class LoginForm(Form):
