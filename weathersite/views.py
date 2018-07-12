@@ -43,6 +43,9 @@ def logout():
 def search():
     form = SearchForm()
     error = None
+    if current_user.get_id() is None:
+        error = "You must be registered to use this feature, please create and account or sign in"
+        return redirect(url_for('register', error=error))
     if form.validate_on_submit():
         column = form.select.data
         search = str.upper(form.search.data)
@@ -65,10 +68,18 @@ def search():
 
 @app.route('/search_results', methods=['GET','POST'])
 def search_results():
+    error = None
+    if current_user.get_id() is None:
+        error = "You must be registered to use this feature, please create and account or sign in"
+        return redirect(url_for('register', error=error))
     return render_template('search_results.html')
 
 @app.route('/location/<string:location_id>')
 def location(location_id):
+    error = None
+    if current_user.get_id() is None:
+        error = "You must be registered to use this feature, please create and account or sign in"
+        return redirect(url_for('register', error=error))
     form = CommentForm()
     location_data = Location.query.get(location_id)
     weather_data = darkSkyRequester(app.config['DARKSKY_API_KEY'],location_data.latitude, location_data.longitude)
@@ -83,6 +94,10 @@ def location(location_id):
 
 @app.route('/comment/<string:location_id>/<string:user_id>', methods=['POST'])
 def comment(location_id, user_id):
+    error = None
+    if current_user.get_id() is None:
+        error = "You must be registered to use this feature, please create and account or sign in"
+        return redirect(url_for('register', error=error))
     form = CommentForm()
     if request.method == 'POST':
         comment = Comments(user_id = user_id,
