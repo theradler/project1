@@ -19,6 +19,9 @@ def register():
     if User.query.filter_by(UserName=form.username.data).count() != 0:
         error = "This username is already in use"
         return render_template('register.html',form=form,error=error)
+    if form.password1.data != form.password2.data:
+        error = "Your passwords did not match, please try again"
+        return render_template('register.html', form=form, error=error)
     if form.validate_on_submit():
         db.session.add(User(UserID = uuid4() ,UserName = form.username.data, Password = form.password1.data ))
         db.session.commit()
