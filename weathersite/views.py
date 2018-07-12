@@ -31,14 +31,16 @@ def register():
 @app.route('/login', methods=['GET','POST'])
 def signin():
     form = LoginForm()
+    error = None
     if form.validate_on_submit():
         user = User.query.filter_by(UserName=form.username.data).first_or_404()
         if user.is_correct_password(form.password.data):
             login_user(user)
             return redirect(url_for('search'))
         else:
-            return redirect(url_for('register'))
-    return render_template('login.html', form=form)
+            error = "Could not log you in, please check you username or password and try again"
+            return render_template('login.html', form=form,error=error)
+    return render_template('login.html', form=form,error=error)
 
 @app.route('/logout', methods=['GET'])
 def logout():
