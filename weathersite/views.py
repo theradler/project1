@@ -1,5 +1,5 @@
 from weathersite import app, db
-from flask import Flask, session, render_template, request, flash, redirect, url_for
+from flask import session, render_template, request, redirect, url_for, abort, jsonify
 from flask_login import login_user, logout_user
 from uuid import uuid4
 from .forms import LoginForm, RegisterForm, SearchForm, CommentForm
@@ -79,3 +79,22 @@ def comment(location_id, user_id):
         db.session.add(comment)
         db.session.commit()
     return render_template('location.html',form=form)
+
+@app.route('/api/<string:zip>', methods=['GET'])
+def api_request(zip):
+    location_data = Location.query.filter_by(zipcode = zip).first()
+    if location_data is None:
+        return jsonify(error=404), 404
+    weather_data = darkSkyRequester(app.config['DARKSKY_API_KEY'],location_data.latitude,location_data.longitude)
+    check_ins = Comments.query.filter_by(location_id= location_data.locationid).count()
+    response = {
+        'place_name': location_data.city,
+        'state': location_data.state,
+        'latitude': location_data.latitude,
+        'longitude': location_data.longitude,
+        'zipcode': location_data.zipcode,
+        'population': location_data.population,
+        'check_ins': check_ins
+
+    }
+    return jsonify({'response': response}), 201

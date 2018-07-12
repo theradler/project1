@@ -55,5 +55,17 @@ a {
 .form-label {
 font-size: 25px;
 }
+.table {
+    border-radius: 5px;
+    width: 50%;
+    margin: 0px auto;
+    float: none;
+}
+#searchResultHeader {
+  border-radius: 5px;
+  width: 50%;
+  margin: 0px auto;
+  float: none;
+}
 
 /*# sourceMappingURL=style.css.map */
