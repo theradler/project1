@@ -2,7 +2,8 @@
   body {
     font: 100% Helvetica, sans-serif;
     padding-top: 40px;
-    margin: 0;
+    margin-left: 5px;
+    margin-right: 5px;
 
   }
 }
@@ -80,5 +81,17 @@ font-size: 25px;
 }
 #brandLogo {
   display: inline;
+  }
+#navbarLink {
+  height: 30px;
+  border-radius: 5px;
+  line-height: 25px;
+  float: left;
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+#navbar {
+  padding-bottom: 5px;
+  border-bottom: 15px;
 }
 /*# sourceMappingURL=style.css.map */

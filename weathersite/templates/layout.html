@@ -25,7 +25,7 @@
 
 <body>
   <div id="navbar">
-  <nav class="navbar navbar-fixed-top bg-primary navbar-dark>
+  <nav class="navbar navbar-fixed-top bg-primary navbar-dark id="navBar" style="border-bottom-width: 20px;">
     <div class="container-fluid ">
       <div class="navbar-header ">
         <button type="button " class="navbar-toggle collapsed " data-toggle="collapse " data-target="#bs-example-navbar-collapse-1 " aria-expanded="false ">
@@ -35,18 +35,28 @@
         <span class="icon-bar "></span>
       </button>
       </div>
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/" id="navbarLink" style="margin-top:5px;">
       <img src="../static/assets/weather_icon.png" width="30" height="30" class="d-inline-block align-top" alt="" id="brandLogo">
       Weather Finder
     </a>
-      <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1 ">
+      <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1 " >
+        {% if current_user.is_active %}
+        <ul class="nav navbar-nav navbar-left bg-primary ">
+          <li>
+            <a href="/search " id="navbarLink" style="margin-top:7px;">
+                Search
+              </a>
+            {% endif %}
+          </li>
+        </ul>
         <ul class="nav navbar-nav navbar-right bg-primary ">
           <li>
+
             {% if current_user.is_active %}
-            <a href="/logout " style="margin-right: 10px;">
+            <a href="/logout " style="margin-right: 10px; margin-top:7px;" id="navbarLink">
                 Logout
               </a> {% else %}
-            <a href="/login " style="margin-right: 10px; ">
+            <a href="/login " style="margin-right: 10px; margin-top:7px;" id="navbarLink">
                 Login/Sign Up
               </a> {% endif %}
           </li>
@@ -57,7 +67,10 @@
     </div>
   </nav>
 </div>
-<div style="margin-top: 10px"></div>
+<div class="row">
+  <br>
+  <br>
+</div>
 
 
 
